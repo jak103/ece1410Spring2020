@@ -11,11 +11,15 @@ int main(void)
 {
   cout << "Hello Tom!" << endl;
   
+
+  
   for (int i = 0; i < 10; ++i)
   {
     cout << i << endl;
   }
   
+
+
   int input = 0;
   while (input != 10)
   {
