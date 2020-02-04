@@ -1,48 +1,41 @@
 
 #include <iostream>
 #include <string>
+#include <sstream>
+#include <fstream>
+
+#include "Fraction.hpp"
+
+#include "Utility.hpp"
 
 using namespace std;
 
-class Fraction
-{
-  public:
-    Fraction();
-    Fraction(int num, int den);
 
-    int getNum() const;
-    int getDen() const;
-   
-    friend Fraction operator + (Fraction bob, Fraction shelby);
-    
-    Fraction operator - (Fraction other);
-
-  private:
-    int num;
-    int den;
-
-};
-
-ostream& operator << (ostream& out, Fraction fraction)
-{
-  out << fraction.getNum() << "/" << fraction.getDen();
-
-  return out;
-}
+ostream& something();
 
 istream& operator >> (istream& in, Fraction& fraction)
 {
+  int num;
+  int den;
+  char slash;
+  in >> num >> slash >> den;
 
+  fraction = Fraction(num, den);
+
+  // fraction.setNum(num);
+  // fraction.setDen(den);
+
+  return in;
 }
 
 Fraction operator + (Fraction bob, Fraction shelby)
 {
   Fraction result;
 
-  bob.num + shelby.num;
+  //bob.num + shelby.num;
 }
 
-Fraction operator + (string bob, Fraction shelby);
+//Fraction operator + (string bob, Fraction shelby);
 
 int main(void)
 {
@@ -52,9 +45,29 @@ int main(void)
 
   a = a + b;
   a = a.operator-(b);
+  
+  operator+(a, b);
 
   cout << a;
   cin >> a >> b;
+
+  stringstream stuff("4/5");
+
+  stuff >> a;
+
+
+  int i = 0;
+  cin >> i;
+
+  operator>>(cin, a);
+
+  fstream file("myFraction.txt");
+
+  file >> a;
+
+  file << a;
+
+  stuff << a;
 
   return 0;
 }
