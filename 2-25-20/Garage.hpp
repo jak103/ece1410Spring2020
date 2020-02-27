@@ -7,9 +7,10 @@
 class Garage
 {
   public:
-    Garage()
+    Garage(int size)
     {
-      
+      garage = new Car*[size];
+      this->size = size;
     }
 
     Car*& operator [](int index)
@@ -17,15 +18,43 @@ class Garage
       return garage[index];
     }
 
+    int getSize()
+    {
+      return size;
+    }
+
+    void remodel(int newSize)
+    {
+      Car** newGarage = new Car*[newSize];
+      
+      for (int i = 0; i < size; ++i)
+      {
+        newGarage[i] = garage[i];
+      }
+      
+      delete [] garage;
+
+      garage = newGarage; 
+      size = newSize;
+    }
+
   private:
-    Car* garage[3];
+    Car** garage;
+    int size;
 };
 
 std::ostream& operator << (std::ostream& out, Garage g)
 {
-  for (int i = 0; i < 2; ++i)
+  for (int i = 0; i < g.getSize(); ++i)
   {
-    out << g[i]->getName() << std::endl;
+    if (g[i] != nullptr)
+    {
+      out << g[i]->getName() << std::endl;
+    }
+    else 
+    {
+      out << "Empty" << endl;
+    }
   }
 
   return out;
